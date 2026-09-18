@@ -106,5 +106,78 @@ public class Main {
         facturas.adi(new Factura(10008, n9, false));
         facturas.adi(new Factura(10009, n10, true));
         facturas.adi(new Factura(10010, n11, false));
+
+        
+        System.out.println("\t\t\tMOSTRAR LOS MEDICAMENTOS QUE SE TIENEN EN TODAS LAS FACTURAS");
+        mostrarMedicamentosFacturas(facturas, medicamentos);
+        //System.out.println("\t\t\t ELIMINAR TODOS LOS MEDICAMENTOS VENCIDOS EN LA PILA DE MEDICAMENTOS");
+        System.out.println("\t\t\t MOVER TODOS LOS MEDICAMENTOS QUE ESTEN A 2 AÑOS DE VENCER AL FINAL DE LA PILA");
+        System.out.println("\t\t\tANTES------------");
+        medicamentos.mostrar();
+        moverMedicamentosProximosAVencer(medicamentos);
+        
+        System.out.println("\t\t\tDESPUES--------------");
+        medicamentos.mostrar();
+        System.out.println("\t\t\t MOSTRAR A TODOS LOS PACIENTES QUE PAGARON SU FACTURA");
+        System.out.println("\t\t\t MOSTRAR A TODOS LOS PACIENTES QUE NO PAGARON SU FACTURA Y EL TOTAL QUE DEBEN PAGAR");        
+        
+    }
+
+    
+    public static String nombreMedicamentoPorCod(int cod, PilaM medicamentos){
+        String buscado = "";
+        boolean encontrado = false;
+        PilaM aux = new PilaM();
+        while(! medicamentos.esVacia()){
+            Medicamento m = medicamentos.eli();
+            if(m.getCod() == cod){
+                buscado = m.getNombre();
+                encontrado = true;
+            }
+            aux.adi(m);
+        }
+        medicamentos.vaciar(aux);
+        if(encontrado){
+            return buscado;
+        }else{
+            System.out.println("NO ENCONTRO EL MEDICAMENTO");
+            return buscado;
+        }
+    }
+    
+    public static void mostrarMedicamentosFacturas(PilaF facturas, PilaM medicamentos){
+        PilaF aux = new PilaF();
+        while(! facturas.esVacia()){
+            Factura f = facturas.eli();
+            System.out.println("\nFACTURA"+f.getIdFac());
+            CSimpleN auxN = new CSimpleN();
+            //CSimpleN medis = f.getMedicamentos()
+            //while(! medis.esVacia())
+            while(!f.getMedicamentos().esVacia()){
+                int idMed = f.getMedicamentos().eli();
+                String nombreMed = nombreMedicamentoPorCod(idMed, medicamentos);
+                System.out.println("\t\t"+nombreMed);
+                auxN.adi(idMed);
+            }
+            f.getMedicamentos().vaciar(auxN);
+            aux.adi(f);
+        }
+        facturas.vaciar(aux);
+    }
+
+    public static void moverMedicamentosProximosAVencer(PilaM medicamentos){
+        PilaM aux = new PilaM();
+        PilaM aux2 = new PilaM();
+        
+        while(! medicamentos.esVacia()){
+            Medicamento m = medicamentos.eli();
+            if(m.getAnioV()> 2026 && m.getAnioV()<= 2028){
+                aux2.adi(m);
+            }else{
+                aux.adi(m);
+            }
+        }
+        medicamentos.vaciar(aux);
+        medicamentos.vaciar(aux2);
     }
 }
