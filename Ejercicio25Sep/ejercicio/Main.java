@@ -72,10 +72,31 @@ public class Main {
         resultados.adi(new Resultado(7594218, 3, 80.0f));
 
         // a) mostrar a los estudiantes junto con sus respectivos resultados obtenidos
+        System.out.println("\t\t\ta) mostrar a los estudiantes junto con sus respectivos resultados obtenidos");
+        
+        
         // b) mostrar a los estudiantes y sus notas solo de la fase X
         // c) muestra el promedio total obtenido en la fase 3 por los estudiantes solo de nivel secundaria
         // d) muestra el promedio aprobatorio de los estudiantes en la fase X
         // e) muestra a el/los estudiantes son mayor nota de la fase X y de nivel Y
     }
 
+    public static void mostrarEstudiantesYResultados(CSimpleE estudiantes, CCircularR resultados){
+        CSimpleE auxE = new CSimpleE();
+        while(! estudiantes.esVacia()){
+            Estudiante e = estudiantes.eli();
+            e.mostrar();
+            CCircularR auxR = new CCircularR();
+            while(! resultados.esVacia()){
+                Resultado r = resultados.eli();
+                if(r.getCiEst() == e.getCi()){
+                    r.mostrar();
+                }
+                auxR.adi(r);
+            }
+            resultados.vaciar(auxR);
+            auxE.adi(e);
+        }
+        estudiantes.vaciar(auxE);
+    }
 }
