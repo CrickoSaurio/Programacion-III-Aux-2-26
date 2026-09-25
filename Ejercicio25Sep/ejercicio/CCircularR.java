@@ -4,7 +4,7 @@ public class CCircularR{
     private Resultado v[];
 
 
-    public CSimpleR(){
+    public CCircularR(){
         ini = fin = 0;
         v = new Resultado[MAX];
     }
@@ -41,14 +41,14 @@ public class CCircularR{
         return elem;
     }
 
-    public void vaciar(CSimpleR otro){
+    public void vaciar(CCircularR otro){
         while(! otro.esVacia()){
             adi(otro.eli());
         }
     }
 
     public void mostrar(){
-        CSimpleR aux = new CSimpleR();
+        CCircularR aux = new CCircularR();
         while(! esVacia()){
             Resultado elem = eli();
             elem.mostrar();
