@@ -171,5 +171,74 @@ fraternidades.adi(bloque1);
 fraternidades.adi(bloque2);
 fraternidades.adi(bloque3);
 fraternidades.adi(bloque4);
+
+fraternidades.mostrar();
+        
+        System.out.println("\t\ta) verifica si en cada fraternidad, los danzarines estan donde corresponden segun su rol, ordenalas de no ser asi");
+        ordenarPorRol(fraternidades);
+        fraternidades.mostrar();
+    }
+
+    
+    public static void ordenarPorRol(CCircularF fraternidades){
+        CCircularF auxF = new CCircularF();
+        while(! fraternidades.esVacia()){
+            Mp_CSimpleD obj = fraternidades.eli();
+            
+            //iteracion para llevar todos lo organizadores a la posion
+            //0 de la mp
+            
+            CSimpleD auxD = new CSimpleD();
+            CSimpleD correctos = new CSimpleD();
+            while(! obj.esVacia(0)){
+                Danzarin d = obj.eliminar(0);
+                if(!d.getRol().equals("organizador")){
+                    auxD.adi(d);
+                }else{
+                    correctos.adi(d);
+                }
+            }
+            
+            obj.vaciar(0, correctos);
+            //iteracion para llevar todos lo fraternos a la posion
+            //1 de la mp
+            
+            while(! obj.esVacia(1)){
+                Danzarin d = obj.eliminar(1);
+                if(d.getRol().equals("fraterno")){
+                    correctos.adi(d);
+                }else{
+                    auxD.adi(d);
+                }
+            }
+            obj.vaciar(1, correctos);
+            
+            //iteracion para llevar todos lo externos a la posion
+            //2 de la mp
+            while(! obj.esVacia(2)){
+                Danzarin d = obj.eliminar(2);
+                if(d.getRol().equals("externo")){
+                    correctos.adi(d);
+                }else{
+                    auxD.adi(d);
+                }
+            }
+            obj.vaciar(2, correctos);
+            
+            while(! auxD.esVacia()){
+                Danzarin d = auxD.eli();
+                
+                if(d.getRol().equals("organizador")){
+                    obj.adicionar(0, d);
+                }else if(d.getRol().equals("fraterno")){
+                    obj.adicionar(1, d);
+                }else{
+                    obj.adicionar(2, d);
+                }
+            }
+            auxF.adi(obj);
+        }
+        
+        fraternidades.vaciar(auxF);
     }
 }
