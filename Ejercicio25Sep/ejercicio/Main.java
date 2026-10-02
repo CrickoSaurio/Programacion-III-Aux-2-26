@@ -76,7 +76,18 @@ public class Main {
         
         
         // b) mostrar a los estudiantes y sus notas solo de la fase X
+
+
+
+
         // c) muestra el promedio total obtenido en la fase 3 por los estudiantes solo de nivel secundaria
+        
+        
+        
+        
+        
+        
+        
         // d) muestra el promedio aprobatorio de los estudiantes en la fase X
         // e) muestra a el/los estudiantes son mayor nota de la fase X y de nivel Y
     }
