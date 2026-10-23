@@ -100,6 +100,26 @@ public class Main {
         canciones.adiFinal(new Cancion(5, "We Cry Together", "Taylour Paige", 6));
         canciones.adiFinal(new Cancion(11, "A World Alone", "", 5));
 
+
+        //a) mostrar las canciones del album con nombre X
+        mostrarCancionesAlbumX("DAMN.", albumes, canciones);
+
+        System.out.println("\n\t\t------------------");
+        mostrarAlbumesArtistaX("Kendrick Lamar", albumes);
+        System.out.println("\n\t\t------------------");
+        mostrarCancionesConArtistaInvitado(canciones);
+
+        // muestra las canciones que tienen artista(s) invitados 
+        // b) mostrar el numero de canciones por artista X
+        System.out.println("\n\t\t------------------");
+        mostrarTotalCancionesArtistaX("Michael Jackson", albumes, canciones);
+        
+        // c) verificar si el artista X tiene almenos X canciones
+        
+        // d) mostrar cuantos minutos dura cada album 
+        
+        // e) mostrar el nombre del album y las canciones de todos los albumes de tipo EP
+    
     }
 
         public static void mostrarCancionesAlbumX(String nombre, LS_NormalA albumes, LS_CircularC canciones) {
@@ -123,5 +143,55 @@ public class Main {
             }
             r=r.getSig();
         }
+    }
+
+    
+    public static void mostrarAlbumesArtistaX(String artista, LS_NormalA albumes) {
+        NodoA r = albumes.p;
+        while (r != null) {
+            if (r.getDato().getArtista().equals(artista)) {
+                System.out.println(r.getDato().getNombre());
+            }
+            r = r.getSig();
+        }
+    }
+
+    public static void mostrarCancionesConArtistaInvitado(LS_CircularC canciones) {
+        NodoC r = canciones.p;
+        while (r.getSig() != canciones.p) {
+            if (!r.getDato().getArtistaInvitado().equals("")) {
+                System.out.println(r.getDato().getNombre() + " - " + r.getDato().getArtistaInvitado());
+            }
+            r = r.getSig();
+        }
+
+        if (!r.getDato().getArtistaInvitado().equals("")) {
+            System.out.println(r.getDato().getNombre() + " - " + r.getDato().getArtistaInvitado());
+        }
+    }
+
+    public static void mostrarTotalCancionesArtistaX(String artista, LS_NormalA albumes, LS_CircularC canciones) {
+        int c = 0;
+
+        NodoA r = albumes.p;
+        while (r != null) {
+            if (r.getDato().getArtista().equals(artista)) {
+                NodoC w = canciones.p;
+                while (w.getSig() != canciones.p) {
+                    if (w.getDato().getIdAlbum() == r.getDato().getIdAlbum()) {
+                        c++;
+                    }
+                    w = w.getSig();
+                }
+                if (w.getDato().getIdAlbum() == r.getDato().getIdAlbum()) {
+                    c++;
+                }
+
+            }
+            
+             r = r.getSig();
+        }
+        
+        System.out.println("El artista "+artista+" tiene "+ c);
     }
 }
