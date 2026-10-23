@@ -101,4 +101,27 @@ public class Main {
         canciones.adiFinal(new Cancion(11, "A World Alone", "", 5));
 
     }
+
+        public static void mostrarCancionesAlbumX(String nombre, LS_NormalA albumes, LS_CircularC canciones) {
+        NodoA r = albumes.p;
+
+        while (r != null) {
+            if (r.getDato().getNombre().equals(nombre)) {
+
+                NodoC w = canciones.p;
+
+                while (w.getSig() != canciones.p) {
+                    if (w.getDato().getIdAlbum() == r.getDato().getIdAlbum()) {
+                        w.getDato().mostrar();
+                    }
+
+                    w = w.getSig();
+                }
+                if (w.getDato().getIdAlbum() == r.getDato().getIdAlbum()) {
+                    w.getDato().mostrar();
+                }
+            }
+            r=r.getSig();
+        }
+    }
 }
