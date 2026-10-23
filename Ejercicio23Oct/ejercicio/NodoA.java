@@ -10,6 +10,7 @@ package ejercicio;
  */
 public class NodoA {
     private Album dato;
+    
     private NodoA sig;
     
     public NodoA(Album dato){
